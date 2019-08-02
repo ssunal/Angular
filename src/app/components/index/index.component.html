@@ -1,0 +1,21 @@
+<table class="table table-hover" [ngStyle]="addStyles()" >
+  <thead>
+  <tr>
+      <td>username</td>
+      <td>e-mail</td>
+        <td>user_id</td>
+      <td colspan="3">Options</td>
+  </tr>
+  </thead>
+
+  <tbody >
+      <tr *ngFor="let adunit of adunits">
+          <td>{{ adunit.username }}</td>
+          <td>{{ adunit.email }}</td>
+            <td>{{ adunit.id_user }}</td>
+          <td><a [routerLink]="['/edit', adunit.id_user]"  class="btn btn-primary">Edit</a></td>
+          <td><a (click)="deleteAdUnit(adunit.id_user)" class="btn btn-danger">Delete</a></td>
+      </tr>
+
+</tbody>
+</table>

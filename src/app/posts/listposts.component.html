@@ -1,0 +1,22 @@
+<table class="table table-hover" [ngStyle]="addStyles()" >
+  <thead>
+  <tr>
+    <td>Username</td>
+    <td>Post Title</td>
+    <td>Content</td>
+    <td colspan="3">Time</td>
+  </tr>
+  </thead>
+
+  <tbody >
+  <tr *ngFor="let posts of postss">
+
+    <td>{{ posts.username }}</td>
+    <td>{{ posts.postTitle }}</td>
+    <td>{{ posts.content }}</td>
+    <td>{{ posts.time }}</td>
+
+  </tr>
+
+  </tbody>
+</table>

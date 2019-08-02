@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">User_Name</label>
+        <input type="text" class="form-control" name="username" formControlName="username" #username [(ngModel)] = "adunit.username"/>
+      </div>
+      <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['username'].errors.required">
+          User Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">e-mail</label>
+        <input type="text" class="form-control" name="email" formControlName="email" #email [(ngModel)] = "adunit.email"/>
+      </div>
+      <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['email'].errors.required">
+        e-mail is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">user id</label>
+        <input type="number" class="form-control" name="id_user" formControlName="id_user" #id_user [(ngModel)] = "adunit.id_user"/>
+      </div>
+      <div *ngIf=" angForm.controls['id_user'].value ==null || angForm.controls['id_user'].value <0" class="alert alert-danger">
+        <div *ngIf="angForm.controls['id_user'].errors.required">
+        id_user is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <button (click)="addAdUnit(username.value,email.value,id_user.value)" [disabled]="angForm.invalid" class="btn btn-primary">Add Account</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<ng2-slim-loading-bar color="blue"></ng2-slim-loading-bar>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a routerLink="welcome" class="navbar-brand" routerLinkActive="active">
+
+    Welcome to Chippers!  <br> {{cookieHeader}}  {{cookieValue}}
+
+  </a>
+
+  <button class="navbar-toggler" type="button"
+          (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon">  </span>
+  </button>
+  <div class="collapse navbar-collapse"
+       [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="create" class="nav-link" routerLinkActive="active">
+        create
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="uspassr" class="nav-link" routerLinkActive="active">
+          uspass
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="postsr" class="nav-link" routerLinkActive="active">
+          posts
+        </a>
+      </li>
+      <li class="nav-item">
+
+        <a routerLink="index" class="nav-link" routerLinkActive="active">
+
+         All Records
+
+        </a>
+      </li>
+      <!-- <li class="nav-item">
+        <a routerLink="signup" class="nav-link" routerLinkActive="active">
+        Sign Up
+        </a>
+      </li> -->
+    </ul>
+
+    <ul class="navbar-nav mr-auto navbar-right">
+
+    <li class="nav-item"><a href="{{login}}"><span class="navbar-brand "></span> {{login}}</a></li>
+    </ul>
+    </div>
+</nav>
+<div class="container" >
+  <router-outlet ></router-outlet>
+
+</div>
+<router-outlet  name="footer"></router-outlet>
+<router-outlet  name="bottomFrame"></router-outlet>
+<a [routerLink]="[{ outlets: { primary: ['login'],bottomFrame: ['products'] } }]">
+  Products List
+</a>

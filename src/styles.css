@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/ng2-slim-loading-bar/style.css";
+
+/* width: 100%; */
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .tablex {
+    width: 1000%;
+  }
+}
