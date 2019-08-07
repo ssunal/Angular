@@ -1,20 +1,43 @@
-<ActionBar title="Home" class="action-bar">
-</ActionBar>
-
-<GridLayout>
-  <ScrollView class="page">
-    <StackLayout class="home-panel">
-      <!--Add your page content here-->
-      <Label textWrap="true" [text]="labelText" class="h2 description-label"> </Label>
-      <Label textWrap="true" text="{{sunal}}" class="h2 description-label"> </Label>
-      <Label textWrap="true" text="Write code in the editor or drag and drop components to build a NativeScript mobile application."
-             class="h2 description-label"></Label>
-      <Label textWrap="true" text="Scan the QR code with your mobile device and watch the changes sync live while you play with the code."
-             class="h2 description-label"></Label>
-    </StackLayout>
-  </ScrollView>
-</GridLayout>
-<button text="tap me" (tap)="onChange()" style="bottom:auto; height: 200px"></button>
+<Page class="page">
+  <Page.actionBar>
 
 
+    <ActionBar title="Home" class="action-bar">
+      <GridLayout>
+        <ScrollView class="page">
+          <StackLayout class="home-panel">
+            <GridLayout rows="auto" columns="75,*,75" class="action-bar p-10">
+              <Button text="Close" class="text-right action-item" row="0" col="3"></Button>
+              <Label text="Login" class="text-center action-bar-title" row="0" col="1"></Label>
+            </GridLayout>
+            <Label textWrap="true" text="{{labelText}}" class="h2 description-label"></Label>
+            <Label textWrap="true" text="{{sunal}}" class="h2 description-label"> </Label>
+
+            <StackLayout class="input-field" class="label font-weight-bold" row="10" col="10">
+
+              <TextField [ngModel]='this.username' (ngModelChange)='this.username=$event'
+                         class="input"  hint="username"></TextField>
+            </StackLayout>
+
+            <StackLayout class="input-field">
+              <TextField [ngModel]='this.password' (ngModelChange)='this.password=$event'
+               class="input" secure="true" hint="password"></TextField>
+            </StackLayout>
+            <Button   text="{{isLoggingIn}} ? 'Log In' : 'Sign Up'" (tap)="onButtonTap($event)" class="btn btn-primary btn-outline"></Button>
+            <Label *ngIf="isLoggingIn" text="Forgot your password?"></Label>
+          </StackLayout>
+        </ScrollView>
+      </GridLayout>
+    </ActionBar>
+
+    <!--Add your page content here-->
+
+
+
+
+
+    <button text="tap me" (tap)="onChange()" style="bottom:auto; height: 200px" class="btn btn-primary btn-outline"></button>
+
+  </Page.actionBar>
+</Page>
 

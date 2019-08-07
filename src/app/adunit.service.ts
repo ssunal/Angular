@@ -11,7 +11,7 @@ export class AdunitService {
   cookieValue = 'UNKNOWN';
   //login:string;
 
-  uri = 'http://localhost:4000/adunits';
+  uri = 'http://192.168.0.4:4000/adunits';
 
   private messageSource= new BehaviorSubject<string>('Sayfa bulunamadı');
   private messageLoginSource= new BehaviorSubject<string>('');
@@ -78,6 +78,7 @@ export class AdunitService {
 
              }
     firstLogin(username, password, app)   {
+    console.log('first logine buraya geldi');
         const obj = {
             username: username,
             password: password
@@ -100,6 +101,7 @@ export class AdunitService {
                 }
                 else
                 {
+                  console.log('olumsuz sonuç geldi');
                     this.cookieService.set( 'username', username );
                     this.cookieValue = this.cookieService.get('username');
                     // console.log(  'cookie: '+this.cookieValue);
