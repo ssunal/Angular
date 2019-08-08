@@ -64,12 +64,13 @@ this.response=  this.adunitservice.firstLogin(username, password,this.app);
 this.returnObject='xyz';
 this.newMessage(this.response);
 // this.newPageName(this.pageName);
-  
+
 }
 
   ngOnInit() {
 
     this.data.currentMessage.subscribe(message => this.message = message)
+    console.log(this.message);
     this.data.currentUsernameMessage.subscribe(username => this.messageUsername = username)
 
     this.data.currentPageMessage.subscribe(pageName => this.pageName = pageName)

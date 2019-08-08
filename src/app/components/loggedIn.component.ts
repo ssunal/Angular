@@ -3,7 +3,7 @@
 
   import { Component, OnInit } from '@angular/core';
   import { AdunitService } from "../adunit.service";
-
+  import { ActivatedRoute, Router } from '@angular/router';
   @Component({
     selector: 'app-loged-In',
     // templateUrl:"<h1>{{welcome}} </h1>"
@@ -14,7 +14,7 @@
 welcomeHome:string="You are logged in";
     message:string;
 
-    constructor(private data: AdunitService) { }
+    constructor(private data: AdunitService,private router:  Router) { }
 
     ngOnInit() {
       this.data.currentMessage.subscribe(message => this.message = message)
@@ -23,5 +23,8 @@ welcomeHome:string="You are logged in";
     newMessage() {
       this.data.changeMessage("mesaj gönderildi")
     }
+    onChange():void{
 
+      this.router.navigate(['login']);
+    }
   }

@@ -13,7 +13,7 @@ export class AdunitService {
 
   uri = 'http://192.168.0.4:4000/adunits';
 
-  private messageSource= new BehaviorSubject<string>('Sayfa bulunamadı');
+  private messageSource= new BehaviorSubject<string>('');
   private messageLoginSource= new BehaviorSubject<string>('');
   private messageUsernameSource= new BehaviorSubject<string>('');
   private messagePageSource= new BehaviorSubject<string>('');
@@ -89,7 +89,7 @@ export class AdunitService {
 
             // .subscribe(res => console.log('JSden dönüp servis içine gelen username:' + res[0].username));
             .subscribe(res => {
-                if(res==1){console.log('JSden dönüp servis içine gelen username:'+res );
+                if(res==1){console.log('JSden dönüp servis içine gelen kayıt yok :'+res );
                     this.changeMessage('username or password is wrong');
                     //this.changeLoginMessage('login');
                     //this.changeUsernameMessage(obj.username);
@@ -97,11 +97,11 @@ export class AdunitService {
                     this.cookieService.deleteAll();
                     app.login='login';
                     app.cookieHeader='';
-                    this.router.navigate(['login']);
+                    //this.router.navigate(['login']);
                 }
                 else
                 {
-                  console.log('olumsuz sonuç geldi');
+                  console.log('kayıt var sonuç geldi');
                     this.cookieService.set( 'username', username );
                     this.cookieValue = this.cookieService.get('username');
                     // console.log(  'cookie: '+this.cookieValue);
@@ -114,10 +114,13 @@ export class AdunitService {
                 }
             });
     }    isLogin(app) {
+    console.log('loginmiymiş ');
         this.cookieValue = this.cookieService.get('username');
+    console.log('cookie '+ this.cookieValue.length);
         if (this.cookieValue.length==0){
             app.login='login';
-            this.router.navigate(['welcome']);
+            console.log('loginmiş ')
+            this.router.navigate(['login']);
         }
     }
              loginAdUnit(username, password)   {

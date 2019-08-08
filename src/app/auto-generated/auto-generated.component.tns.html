@@ -1,4 +1,4 @@
-<Page class="page">
+<Page class="page" >
   <Page.actionBar>
 
 
@@ -11,7 +11,8 @@
               <Label text="Login" class="text-center action-bar-title" row="0" col="1"></Label>
             </GridLayout>
             <Label textWrap="true" text="{{labelText}}" class="h2 description-label"></Label>
-            <Label textWrap="true" text="{{sunal}}" class="h2 description-label"> </Label>
+            <Label textWrap="true" text="{{sunal}} " class="h2 description-label"> </Label>
+
 
             <StackLayout class="input-field" class="label font-weight-bold" row="10" col="10">
 
@@ -23,7 +24,8 @@
               <TextField [ngModel]='this.password' (ngModelChange)='this.password=$event'
                class="input" secure="true" hint="password"></TextField>
             </StackLayout>
-            <Button   text="{{isLoggingIn}} ? 'Log In' : 'Sign Up'" (tap)="onButtonTap($event)" class="btn btn-primary btn-outline"></Button>
+            <Label textWrap="true" text="{{message}}" class="h2 description-label" style="color:red"> </Label>
+            <Button   text=" Log In " (tap)="onButtonTap($event)" class="btn btn-primary btn-outline"></Button>
             <Label *ngIf="isLoggingIn" text="Forgot your password?"></Label>
           </StackLayout>
         </ScrollView>
