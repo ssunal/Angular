@@ -37,9 +37,10 @@ export class ListpostsComponent implements OnInit {
        .subscribe((data: Posts[]) => {
          console.log('posts function çalışacak servise gidiyor');
          this.postss = data;
+         console.log('dönnen:'+JSON.stringify(this.postss));
        });
 
-    console.log('dönnen:'+JSON.stringify(this.result));
+
   }
 
 }

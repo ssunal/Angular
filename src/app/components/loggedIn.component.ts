@@ -5,7 +5,7 @@
   import { AdunitService } from "../adunit.service";
   import { ActivatedRoute, Router } from '@angular/router';
   @Component({
-    selector: 'app-loged-In',
+    selector: 'app-logged-In',
     // templateUrl:"<h1>{{welcome}} </h1>"
     templateUrl: './loggedIn.component.html'
       // <button (click)="newMessage()">New Message</button>

@@ -7,7 +7,7 @@ import {Uspass} from "../../../models/uspass";
   styleUrls: ['./listuspass.component.css']
 })
 export class ListuspassComponent implements OnInit {
-  uspasses: Uspass[] =[{username:"sinek",mail:"ssunal@52linesofcode.uk",password:"cemo"},{username:"sineka",mail:"ssunal@52linesofcode.co.uk",password:"cemoc"}];
+  uspasses: Uspass[] =[{username:"sinek",mail:"ssunal@52linesofcode.uk",password:"cemoss"},{username:"sineka",mail:"ssunal@52linesofcode.co.uk",password:"cemoc"}];
   constructor() { }
 
   ngOnInit() {

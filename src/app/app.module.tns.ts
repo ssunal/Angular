@@ -14,9 +14,11 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RouterModule} from "@angular/router";
 
+
 // Uncomment and add to NgModule imports if you need to use two-way binding
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import {NativeScriptRouterModule} from "nativescript-angular";
+import {Uspass} from "../../models/uspass";
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 // import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
@@ -33,15 +35,14 @@ import {NativeScriptRouterModule} from "nativescript-angular";
 
   imports: [
     NativeScriptModule,
-    AppRoutingModule,
-    HttpClientModule,
+     HttpClientModule,
     SlimLoadingBarModule,
     NativeScriptRouterModule,
     NativeScriptFormsModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [ CookieService ],
+  providers: [ CookieService ,Uspass],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

@@ -9,6 +9,7 @@ import {EventData} from "tns-core-modules/data/observable";
 import {Button} from "tns-core-modules/ui/button";
 
 
+
 @Component({
   selector: 'app-auto-generated',
   templateUrl: './auto-generated.component.tns.html',
@@ -52,9 +53,29 @@ this.labelText='this was tapped';
   onButtonTap(args: EventData) {
     const button = <Button>args.object;
     console.log('login.componenete girdi:'+this.username+this.password);
-    this.response=  this.adunitservice.firstLogin(this.username, this.password,this.app);
+
+    //this.uspass.auth_token='';
+
+    let a=0;
+    let uri='http://192.168.0.4:8090';
+    if(a==0){
+    this.adunitservice.apiChippersLogin(this.uspass,uri)
+      .subscribe((uspass: Uspass) => {
+        console.log('posts function çalışacak servise gidiyor');
+
+        console.log(uspass);
+        if(!uspass.islogin){
+          this.message='username or password is incorrect';
+        } else {
+          //this.router.navigate(['logged-in']);
+          this.message='fksdfjksdjflsjl';
+        }
+
+      });
     console.log('Button tapped');
-  }
+  }else {
+      this.response=this.adunitservice.firstLogin(this.username,this.password,this.app);
+    }}
   submit() {
 
     console.log('login.componenete girdi:'+this.username+this.password);

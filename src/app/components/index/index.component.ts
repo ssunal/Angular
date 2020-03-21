@@ -17,7 +17,7 @@ export class IndexComponent implements OnInit {
   id:number;
   constructor(
       private app: AppComponent,
-    private route: ActivatedRoute,
+      private route: ActivatedRoute,
       private data: AdunitService,
       private router: Router,
     private adunitservice: AdunitService

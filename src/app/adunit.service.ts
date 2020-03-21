@@ -1,8 +1,12 @@
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable, BehaviorSubject} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {Uspass} from '../../models/uspass';
+import { tap } from  'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +21,7 @@ export class AdunitService {
   private messageLoginSource= new BehaviorSubject<string>('');
   private messageUsernameSource= new BehaviorSubject<string>('');
   private messagePageSource= new BehaviorSubject<string>('');
+  authSubject  =  new  BehaviorSubject(false);
   currentMessage= this.messageSource.asObservable();
   currentLoginMessage= this.messageLoginSource.asObservable();
   currentPageMessage= this.messagePageSource.asObservable();
@@ -26,6 +31,7 @@ export class AdunitService {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
+    private uspass: Uspass,
 
     private http: HttpClient,
               private cookieService: CookieService) { }
@@ -77,6 +83,23 @@ export class AdunitService {
 
 
              }
+
+    apiChippersLogin(uspass: Uspass,uri: string): Observable<Uspass> {
+    console.log(this.uri);
+      return this.http.post<Uspass>(uri+`/json/posts/login/`, uspass).pipe(
+        tap((uspass:  Uspass ) => {
+          console.log('servisten gelen  parametre '+
+          JSON.stringify(uspass)+'jkjkj:'+ uspass.islogin);
+          if (uspass.islogin) {
+            console.log('içeride:'+uspass.islogin);
+            //localStorage.set("ACCESS_TOKEN", uspass.auth_token);
+            //localStorage.set("ISLOGIN", uspass.islogin);
+           // this.authSubject.next(true);
+          }
+        })
+
+      );
+  }
     firstLogin(username, password, app)   {
     console.log('first logine buraya geldi');
         const obj = {
@@ -104,7 +127,7 @@ export class AdunitService {
                   console.log('kayıt var sonuç geldi');
                     this.cookieService.set( 'username', username );
                     this.cookieValue = this.cookieService.get('username');
-                    // console.log(  'cookie: '+this.cookieValue);
+                      // console.log(  'cookie: '+this.cookieValue);
                     // this.changeMessage(username+': Loged in');
                     this.changeLoginMessage(this.cookieValue);
                     app.login='logout';
@@ -116,7 +139,9 @@ export class AdunitService {
     }    isLogin(app) {
     console.log('loginmiymiş ');
         this.cookieValue = this.cookieService.get('username');
-    console.log('cookie '+ this.cookieValue.length);
+    console.log('cookie '+ this.cookieValue.length +this.cookieValue);
+
+
         if (this.cookieValue.length==0){
             app.login='login';
             console.log('loginmiş ')

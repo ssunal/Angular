@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WelcomeComponent } from './components/welcome.component';
 import { CreateComponent } from './components/create/create.component';
+import { Uspass } from '../../models/uspass';
 import { LoginComponent } from './components/login/login.component';
 import { IndexComponent } from './components/index/index.component';
 import { MessagesComponent } from './components/messages/messsages.component';
@@ -27,6 +28,7 @@ import {PageNotFoundComponent} from "./pageNotFound.component";
 import {MatAutocompleteModule,MatFormFieldModule,MatInputModule,MatExpansionModule,MatIconModule,MatDatepickerModule,
   MatNativeDateModule  } from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
+
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
   {
@@ -84,7 +86,7 @@ const routes: Routes = [
 
     AppRoutingModule
   ],
-  providers: [ AdunitService,DataService, CookieService ], // Data service sadece mesajlaşma için var
+  providers: [ AdunitService,DataService,Uspass, CookieService ], // Data service sadece mesajlaşma için var
   bootstrap: [AppComponent]
 
 })

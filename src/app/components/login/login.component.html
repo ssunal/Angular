@@ -24,7 +24,7 @@
       <span style="color:red">{{message}}</span>
 
       <div class="form-group">
-        <button (click)="setLogin(username.value, password.value)" [disabled]="angForm.invalid" class="btn btn-primary">Login</button>
+        <button (click)="login(username.value, password.value)" [disabled]="angForm.invalid" class="btn btn-primary">Login</button>
           If you haven't registered, <a [routerLink]="['/signup']"  class="btn btn-primary">Sign up</a>
       </div>
 

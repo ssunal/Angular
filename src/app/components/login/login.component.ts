@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdunitService } from '../../adunit.service';
 import { AdUnit } from '../index/AdUnit';
 import { AppComponent } from "../../app.component";
+import {Uspass} from '../../../../models/uspass';
+import {Posts} from "../../../../models/posts";
 //import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
@@ -25,7 +27,7 @@ adunit:AdUnit;
   constructor(
     private route: ActivatedRoute,
     private adunitservice: AdunitService,
-    //private cookieservice: CookieService,
+    private uspass: Uspass,
     private app: AppComponent,
     private data: AdunitService,
     private router: Router,
@@ -66,9 +68,27 @@ this.newMessage(this.response);
 // this.newPageName(this.pageName);
 
 }
+login(username, password){
+    this.uspass.username=username;
+    this.uspass.password=password;
+  this.uspass.auth_token='';
+let uri='/api';
+   this.adunitservice.apiChippersLogin(this.uspass,uri)
+     .subscribe((uspass: Uspass) => {
+       console.log('posts function çalışacak servise gidiyor');
 
+       console.log(uspass);
+       if(!uspass.islogin){
+         this.message='username or password is incorrect';
+       } else {
+         this.app.login='logout';
+         this.router.navigate(['logged-in']);
+       }
+
+     });
+}
   ngOnInit() {
-
+    this.adunitservice.isLogin(this.app);
     this.data.currentMessage.subscribe(message => this.message = message)
     console.log(this.message);
     this.data.currentUsernameMessage.subscribe(username => this.messageUsername = username)
