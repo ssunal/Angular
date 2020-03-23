@@ -1,7 +1,6 @@
 
 import { Component } from '@angular/core';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
-// import{NavbarComponent} from './navbar.component';
 import { AdunitService } from "./adunit.service";
 import { CookieService } from 'ngx-cookie-service';
 import { NavigationCancel,
@@ -10,7 +9,9 @@ import { NavigationCancel,
   NavigationError,
   NavigationStart,
   Router } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
+// import{NavbarComponent} from './navbar.component';
 @Component({
   selector: 'app-root',
   moduleId: module.id,
@@ -29,6 +30,7 @@ export class AppComponent {
       this.navigationInterceptor(event);
     });
   }
+
   cookieValue = 'UNKNOWN';
 
 

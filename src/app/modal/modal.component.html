@@ -1,0 +1,36 @@
+<p>
+  modal works!
+</p>
+<mat-drawer-container class="example-container" >
+
+  <mat-drawer-content>
+    <mat-form-field>
+      <mat-label>Sidenav mode</mat-label>
+      <mat-select  [(value)]="data.side">
+        <mat-option value="side">Side</mat-option>
+        <mat-option value="over">Over</mat-option>
+        <mat-option value="push">Push</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Has backdrop</mat-label>
+      <mat-select [(value)]="data.hasbackdrop">
+        <mat-option>Unset</mat-option>
+        <mat-option [value]="true">True</mat-option>
+        <mat-option [value]="false">False</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+<h1 mat-dialog-title>Want to receive our emails?</h1>
+<div mat-dialog-content>
+  <p>What's your email?</p>
+  <mat-form-field  style="border-color: chocolate">
+    <input matInput [(ngModel)]="data.email" value="{{data.email}}">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Yes</button>
+</div>

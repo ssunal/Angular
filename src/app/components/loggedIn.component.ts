@@ -3,7 +3,9 @@
 
   import { Component, OnInit } from '@angular/core';
   import { AdunitService } from "../adunit.service";
-  import { ActivatedRoute, Router } from '@angular/router';
+  import { Router } from '@angular/router';
+  import {ModalComponent} from "../modal/modal.component";
+  import {MatDialog} from "@angular/material/dialog";
   @Component({
     selector: 'app-logged-In',
     // templateUrl:"<h1>{{welcome}} </h1>"
@@ -13,8 +15,11 @@
   export class LoggedInComponent implements OnInit {
 welcomeHome:string="You are logged in";
     message:string;
-
-    constructor(private data: AdunitService,private router:  Router) { }
+    email: string;
+    shouldRun: any;
+    side: string='over';
+    hasbackdrop: string='over';
+    constructor(public dialog: MatDialog,private data: AdunitService,private router:  Router) { }
 
     ngOnInit() {
       this.data.currentMessage.subscribe(message => this.message = message)
@@ -26,5 +31,18 @@ welcomeHome:string="You are logged in";
     onChange():void{
 
       this.router.navigate(['login']);
+    }
+    openDialog(): void {
+      const dialogRef = this.dialog.open(ModalComponent, {
+        width: '350px',
+        height: '550px',
+        data: {email:this.email,side:this.side,hasbackdrop:this.hasbackdrop}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.email = result.email;
+        this.side = result.side;
+        this.hasbackdrop = result.hasbackdrop;
+      });
     }
   }

@@ -19,6 +19,7 @@ import {RouterModule} from "@angular/router";
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import {NativeScriptRouterModule} from "nativescript-angular";
 import {Uspass} from "../../models/uspass";
+import {MatRadioModule} from "@angular/material/radio";
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 // import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
@@ -35,12 +36,12 @@ import {Uspass} from "../../models/uspass";
 
   imports: [
     NativeScriptModule,
-     HttpClientModule,
+    HttpClientModule,
     SlimLoadingBarModule,
     NativeScriptRouterModule,
     NativeScriptFormsModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    FormsModule, ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), MatRadioModule
   ],
   providers: [ CookieService ,Uspass],
   bootstrap: [AppComponent],

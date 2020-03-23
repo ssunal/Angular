@@ -75,11 +75,9 @@ export class AdunitService {
                      writer:writer,
                      api:api
                  };
-
                     return this
                          .http
-                             .get(`/api/json/posts/all/${obj.writer}/${obj.api}`)
-                              ;
+                             .get(`/api/json/posts/all/${obj.writer}/${obj.api}`);
 
 
              }

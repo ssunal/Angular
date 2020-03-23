@@ -1,5 +1,13 @@
 <div >
+
+  <button mat-raised-button (click)="openDialog()">Open modal</button>
+
+  <br />
+  <div *ngIf="email">
+   <p> You signed up with: {{this.email}} {{this.side}} {{this.hasbackdrop}}</p>
+  </div>
+</div><div >
 {{welcomeHome}}
 <br>{{this.username}} {{this.password}}
-
 </div>
+
