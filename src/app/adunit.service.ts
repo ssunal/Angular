@@ -66,6 +66,7 @@ export class AdunitService {
                          .http
                          .post(`${this.uri}/add`,obj)
                          .subscribe(res => {
+                           console.log('kdfaskldfjaskldfjsladk:'+res);
                                             if(res==1){console.log('JSden dönüp servis içine gelen username:'+res );
                                           }
                                           });

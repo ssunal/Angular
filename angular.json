@@ -26,7 +26,18 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/masonry.pkgd.js",
+
+
+
+              "src/assets/js/modernizr.js",
+
+
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/materialize.min.js",
+              "src/assets/js/wow.min.js"
+            ]
           },
           "configurations": {
             "production": {
