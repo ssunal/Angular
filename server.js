@@ -48,8 +48,7 @@
     });
     /**/
     const port = process.env.PORT || 5000;
-//    console.log('adsjkhaskdhasjkdhask');
-    // app.get('/', (req, res) => res.redirect('http://127.0.0.1:4100/welcome'));
+
     app.use('/adunits', adUnitRoutes);
     const server = app.listen(port, function(){
     const host = server.address().address;

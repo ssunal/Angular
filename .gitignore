@@ -10,7 +10,8 @@ src/**/*.js
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-
+#file upload
+/uploads
 # dependencies
 /node_modules
 # rubbish bin

@@ -7,6 +7,9 @@
 <body>
 
 <div class="container">
+  <div class="image-preview mb-3" *ngIf="previewUrl">
+    <img [src]="previewUrl" height="300" />
+  </div>
   <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
   <button type="button" class="btn btn-success btn-s"
           (click)="uploader.uploadAll()"
