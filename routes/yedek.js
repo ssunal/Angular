@@ -17,15 +17,35 @@ let storage = multer.diskStorage({
 });
 let upload = multer({storage: storage});
 
+adUnitRoutes.route('/mapi', function (req, res) {
+  res.end('file upload');
+});
+adUnitRoutes.route('/upload',upload.single('file')).get(function (req, res) {
 
+  if (!req.file) {
+    console.log("Your request doesn’t have any file");
+    return res.send({
+      success: false
+    });
+
+  } else {
+    console.log('Your file has been received successfully');
+    return res.send({
+      success: true
+    })
+  }
+});
 
 /**/
 
-      const mongoose = require('../config/DB.js');
+const mongoose = require('../config/DB.js');
 
-      let con = mongoose.getConnection();
+let con = mongoose.getConnection();
+const PORT = process.env.PORT || 4000;
 
-
+app.listen(PORT, function () {
+  console.log('Node.js server is running on port ' + PORT);
+});
 
 
 
@@ -39,19 +59,18 @@ adUnitRoutes.route('/cookie').get(function (req, res) {
 
 // console.log('Cookies: ', req.cookies);
 });
-
 adUnitRoutes.route('/setcookie').post(function (req, res) {
   console.log('/setcookie içindeyiz');
-     let username = req.body.username;
-     console.log(username);
-     res.cookie("adisoyadi", username);
+  let username = req.body.username;
+  console.log(username);
+  res.cookie("adisoyadi", username);
 
 
-   // res.cookie('uuid', '1', { signed: false, httpOnly: false });//signed için secret gerekiyor
-   //   res.cookie('username',username, { maxAge: 120*60000, httpOnly: false });
-   //   res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });
-   //   res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: false });
-     // console.log('Cookies: ', req.cookies);
+  // res.cookie('uuid', '1', { signed: false, httpOnly: false });//signed için secret gerekiyor
+  //   res.cookie('username',username, { maxAge: 120*60000, httpOnly: false });
+  //   res.cookie('cart', { items: [1,2,3] }, { maxAge: 900000 });
+  //   res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: false });
+  // console.log('Cookies: ', req.cookies);
 
 });
 // app.get('/clearcookie',function(req, res){
@@ -69,15 +88,15 @@ adUnitRoutes.route('/add').post(function (req, res) {
 
   console.log('add fonksiyonu çalıtııııııı');
 // res.status(200).json({'adUnit': 'AdUnit in added successfully'});
-console.log('BURAYA ADD YAPACAK KOD YAZILACAK'+req.body.username);
+  console.log('BURAYA ADD YAPACAK KOD YAZILACAK'+req.body.username);
   let adUnit = new AdUnit(req.body);
   con.query(
     "INSERT INTO  users  (username,email,id_user) VALUES ('"+req.body.username+"','"+req.body.email+"','"+req.body.id_user+"');",function (err, resultDEL) {
-        if (err){
-            console.log(err);
-        }
-        res.status(200).json(resultDEL)});
-console.log('BURAYA'+req.body.username);
+      if (err){
+        console.log(err);
+      }
+      res.status(200).json(resultDEL)});
+  console.log('BURAYA'+req.body.username);
   // adUnit.save()
   //   .then(game => {
   //     res.status(200).json({'adUnit': 'AdUnit in added successfully'});
@@ -88,37 +107,37 @@ console.log('BURAYA'+req.body.username);
 });
 // Login system
 adUnitRoutes.route('/login').post(function (req, res) {
-let adUnit = new AdUnit(req.body);
+  let adUnit = new AdUnit(req.body);
 // res.status(200).json({'adUnit': 'AdUnit in added successfully'});
-let password = req.body.password;
-let username = req.body.username;
-    console.log('login fonksiyonu çalıtııııııı' + username+password);
-    // var query="SELECT username,password FROM users where id_user='"+username+"' and password='"+password+"';";
-    let query="SELECT username,password FROM users where username='"+username+"' and  password='"+password+"';";
-    console.log(query);
+  let password = req.body.password;
+  let username = req.body.username;
+  console.log('login fonksiyonu çalıtııııııı' + username+password);
+  // var query="SELECT username,password FROM users where id_user='"+username+"' and password='"+password+"';";
+  let query="SELECT username,password FROM users where username='"+username+"' and  password='"+password+"';";
+  console.log(query);
 
   con.query(query, function (err, result) {
-      if(err){
-          console.log(err);
-      }
-console.log('JSte sqlden gelen kayıt boyu'+result.length);
-if (result.length==1) {
+    if(err){
+      console.log(err);
+    }
+    console.log('JSte sqlden gelen kayıt boyu'+result.length);
+    if (result.length==1) {
 
-  console.log('JSteki gelen username:'+result[0].username);
- // res.redirect('http://localhost:4100/logined-in');
-} else {
-  console.log('kayıt bulamadı redirect ediyor');
-result=1;
-  //res.render('http://localhost:4200/login');
-}
-console.log(result);
+      console.log('JSteki gelen username:'+result[0].username);
+      // res.redirect('http://localhost:4100/logined-in');
+    } else {
+      console.log('kayıt bulamadı redirect ediyor');
+      result=1;
+      //res.render('http://localhost:4200/login');
+    }
+    console.log(result);
     res.status(200).json(result);
     console.log('JSteki gelen kayıt boyu:'+result.length);
 
- console.log('gelen json='+JSON.stringify(result));
+    console.log('gelen json='+JSON.stringify(result));
   });
 
-    // res.json(adUnit);
+  // res.json(adUnit);
 });
 
 // Defined get data(index or listing) route
@@ -126,13 +145,13 @@ adUnitRoutes.route('/').get(function (req, res) {
   console.log('/ fonksiyonu çalışşşşşştııııııı');
 
 
-    AdUnit.find(function (err, adUnits){
+  AdUnit.find(function (err, adUnits){
 
     if(err){
       console.log(err);
     }
     else {
-        console.log(adUnits);
+      console.log(adUnits);
 
       res.json(adUnits);
     }
@@ -141,11 +160,11 @@ adUnitRoutes.route('/').get(function (req, res) {
 adUnitRoutes.route('/index').get(function (req, res) {
   console.log('/index fonksiyonu çalıştııııııı');
   con.query("SELECT username,email,id_user FROM users;", function (err, resultDEL) {
-      if(err){
-          console.log(err);
-      }
-      res.status(200).json(resultDEL)});
-    console.log('getirrrrrrrriyor');
+    if(err){
+      console.log(err);
+    }
+    res.status(200).json(resultDEL)});
+  console.log('getirrrrrrrriyor');
 
   //   AdUnit.find(function (err, adUnits){
   //   if(err){
@@ -158,44 +177,44 @@ adUnitRoutes.route('/index').get(function (req, res) {
 });
 adUnitRoutes.route('http://localhost:8090/json/posts/all/:writer/:api').get(function (req, res1) {
 
-    let writer = req.params.writer;
-    let api = req.params.api;
-    res1.status(200);
-console.log('içine girdiiiiiiiiii res1 ' + writer+api+ res1[0]);
+  let writer = req.params.writer;
+  let api = req.params.api;
+  res1.status(200);
+  console.log('içine girdiiiiiiiiii res1 ' + writer+api+ res1[0]);
 });
 // Defined edit route
 adUnitRoutes.route('/edit/:id_user').get(function (req, res) {
-let id_user = req.params.id_user;
+  let id_user = req.params.id_user;
   console.log('edit fonksiyonu çalıtııııııı'+ id_user);
 
   AdUnit.findById(id_user, function (err, adUnit){
     console.log(id_user);
     con.query("SELECT username,email,id_user FROM users where id_user='"+id_user+"';", function (err, resultDEL) {
       // console.log(JSON.stringify(resultDEL));
-        if(err){
-            console.log(err);
-        }
+      if(err){
+        console.log(err);
+      }
       res.status(200).json(resultDEL)});
-      // res.json(adUnit);
+    // res.json(adUnit);
   });
 });
 adUnitRoutes.route('/delete/:id_user').get(function (req, res) {
   console.log('delete fonksiyonu çalıtııııııı');
-    // AdUnit.findByIdAndRemove({_username: req.params.username}, function(err, adUnit){
-    //     if(err) res.json(err);
-    //     else res.json('Successfully removed');
-    // });
-    let id_user = req.params.id_user;
+  // AdUnit.findByIdAndRemove({_username: req.params.username}, function(err, adUnit){
+  //     if(err) res.json(err);
+  //     else res.json('Successfully removed');
+  // });
+  let id_user = req.params.id_user;
 
-      AdUnit.findByIdAndRemove(id_user, function (err, adUnit){
-        console.log(id_user);
-        var st="DELETE FROM users where id_user='"+id_user+"';";
-        console.log(st);
-        con.query(st, function (err, resultDEL) {
-          // console.log(JSON.stringify(resultDEL));
-          res.status(200).json(resultDEL)});
-          // res.json(adUnit);
-      });
+  AdUnit.findByIdAndRemove(id_user, function (err, adUnit){
+    console.log(id_user);
+    var st="DELETE FROM users where id_user='"+id_user+"';";
+    console.log(st);
+    con.query(st, function (err, resultDEL) {
+      // console.log(JSON.stringify(resultDEL));
+      res.status(200).json(resultDEL)});
+    // res.json(adUnit);
+  });
 });
 
 //  Defined update route
@@ -205,14 +224,14 @@ adUnitRoutes.route('/update/:id_user').post(function (req, res) {
 
   console.log('adunitroute.jse  kadar geldi' +req.body.username+req.body.email+ req.body.id_user);
   AdUnit.findById(req.body.id_user, function (err, adUnit){
-let sqlString="UPDATE  users SET username='"+req.body.username+"',email='"+req.body.email+"' WHERE id_user='"+req.body.id_user+"';";
-console.log(sqlString);
+    let sqlString="UPDATE  users SET username='"+req.body.username+"',email='"+req.body.email+"' WHERE id_user='"+req.body.id_user+"';";
+    console.log(sqlString);
     con.query(sqlString, function (err, resultDEL) {
       if(err){
-          console.log(err);
+        console.log(err);
       }
       res.status(200).json(resultDEL)});
-      // res.json(adUnit);
+    // res.json(adUnit);
   });
 });
 //   AdUnit.findById(req.params.id_user, function(err, adUnit) {

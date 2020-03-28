@@ -24,19 +24,21 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css", "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "src/assets/js/masonry.pkgd.js",
-
-
-
-              "src/assets/js/modernizr.js",
-
-
-              "src/assets/js/jquery.min.js",
-              "src/assets/js/materialize.min.js",
-              "src/assets/js/wow.min.js"
+              "./src/assets/js/masonry.pkgd.js",
+              "./src/assets/js/jquery.fancybox.pack.js",
+              "./src/assets/js/validator.min.js",
+              "./src/assets/js/jquery.nav.js",
+              "./src/assets/js/modernizr.js",
+              "./src/assets/js/jquery.sticky.js",
+              "./src/assets/js/jquery.mixitup.min.js",
+              "./src/assets/js/wow.min.js",
+              "./src/assets/js/init.js",
+              "./src/assets/js/jquery.min.js",
+              "./src/assets/js/materialize.min.js",
+              "./src/assets/js/wow.min.js"
             ]
           },
           "configurations": {

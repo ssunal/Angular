@@ -6,16 +6,48 @@
     cors = require('cors'),
     mongoose = require('mysql'),
     config = require('./config/DB');
-
-
     const adUnitRoutes = require('./routes/adunit.route');
     const app = express();
     app.use(bodyParser.json());
     app.use(cors());
-
     app.use(cookieParser());
+    /*file upload*/
+    const multer = require('multer');
+    const DIR = './uploads';
+    let storage = multer.diskStorage({
+      destination: (req, file, cb) => {
+        cb(null, DIR);
+      },
+      filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + '.' + path.extname(file.originalname));
+      }
+    });
+    let upload = multer({storage: storage});
 
-    const port = process.env.PORT || 4000;
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+
+
+    app.get('/fu', function (req, res) {
+      res.end('file upload');
+    });
+
+    app.post('/fu/upload',upload.single('dosya'), function (req, res) {
+      if (!req.file) {
+        console.log("Your request doesn’t have any file");
+        return res.send({
+          success: false
+        });
+
+      } else {
+        console.log('Your file has been received successfully');
+        return res.send({
+          success: true
+        })
+      }
+    });
+    /**/
+    const port = process.env.PORT || 5000;
 //    console.log('adsjkhaskdhasjkdhask');
     // app.get('/', (req, res) => res.redirect('http://127.0.0.1:4100/welcome'));
     app.use('/adunits', adUnitRoutes);

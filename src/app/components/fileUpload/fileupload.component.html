@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>file upload</title>
+</head>
+<body>
+
+<div class="container">
+  <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+  <button type="button" class="btn btn-success btn-s"
+          (click)="uploader.uploadAll()"
+          [disabled]="!uploader.getNotUploadedItems().length" >
+    Upload
+  </button>
+
+</div>
+</body>
+</html>

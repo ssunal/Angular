@@ -33,6 +33,8 @@ import {ModalComponent} from "./modal/modal.component";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatSelectModule} from "@angular/material/select";
+import {FileUploadModule} from "ng2-file-upload";
+import {FileUploadComponent} from "./components/fileUpload/fileupload.component";
 
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
@@ -54,6 +56,7 @@ const routes: Routes = [
   {path: 'messages',component: MessagesComponent},
   {path: 'signup',component: SignUpComponent},
   {path: 'logged-in',component: LoggedInComponent},
+  {path: 'upload',component: FileUploadComponent},
 
   {path:'', redirectTo: 'welcome',pathMatch:'full'},
   {path:'**', component:PageNotFoundComponent},
@@ -80,7 +83,8 @@ const routes: Routes = [
     ListpostsComponent,
     FooterComponent,
     ModalComponent,
-    GccComponent
+    GccComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,8 @@ const routes: Routes = [
     MatAutocompleteModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule, MatExpansionModule, MatIconModule, MatDatepickerModule,
     MatNativeDateModule,
     MaterialModule,
-    AppRoutingModule, MatRadioModule, MatSidenavModule, MatSelectModule
+    AppRoutingModule, MatRadioModule, MatSidenavModule, MatSelectModule,
+    FileUploadModule
   ],
   providers: [ AdunitService,DataService,Uspass, CookieService ], // Data service sadece mesajlaşma için var
   bootstrap: [AppComponent],
