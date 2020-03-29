@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { GccComponent } from './components/gcc/gcc.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { CreateComponent } from './components/create/create.component';
 import { Uspass } from '../../models/uspass';
@@ -35,6 +35,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatSelectModule} from "@angular/material/select";
 import {FileUploadModule} from "ng2-file-upload";
 import {FileUploadComponent} from "./components/fileUpload/fileupload.component";
+import {EmailValidator} from "../../common/emailvalidator";
 
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
@@ -100,7 +101,8 @@ const routes: Routes = [
     AppRoutingModule, MatRadioModule, MatSidenavModule, MatSelectModule,
     FileUploadModule
   ],
-  providers: [ AdunitService,DataService,Uspass, CookieService ], // Data service sadece mesajlaşma için var
+  providers: [ AdunitService,DataService,Uspass, CookieService,
+    EmailValidator ], // Data service sadece mesajlaşma için var
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })
