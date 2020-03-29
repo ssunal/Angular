@@ -1,41 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-
+import {FileUploader} from "ng2-file-upload";
 import {HttpClient, HttpEventType} from "@angular/common/http";
-import {AdUnit} from "../index/AdUnit";
-import {AppComponent} from "../../app.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AdunitService} from "../../adunit.service";
 
-
+const uploadAPI = 'http://192.168.0.4:5000/fu/upload'; // better use a service class
 
 @Component({
   selector: 'app-upload',
-  templateUrl: './fileupload.component.html',
+  template: '<div class="container">\n' +
+    '  <input type="file" name="file" ng2FileSelect [uploader]="uploader" />\n' +
+    '  <button type="button" class="btn btn-success btn-s"\n' +
+    '          (click)="uploader.uploadAll()"\n' +
+    '          [disabled]="!uploader.getNotUploadedItems().length" >\n' +
+    '    Upload\n' +
+    '  </button>\n' +
+    '\n' +
+    '</div>\n',
   styleUrls: ['../../../assets/css/style.css']
 })
 export class FileUploadComponent implements OnInit {
-
-  adunits: AdUnit[];
-  message:string;
+  constructor(private http: HttpClient) { }
   title = 'ng8fileuploadexample';
   uploadedFilePath: string = null;
   previewUrl:any = null;
   fileData: File = null;
   url = 'http://192.168.0.4:5000/fu/upload';
-
+  public uploader: FileUploader = new FileUploader({ url: uploadAPI, itemAlias: 'dosya' });
   fileUploadProgress: any;
-  id:number;
-  constructor(
-    private app: AppComponent,
-    private route: ActivatedRoute,
-    private data: AdunitService,
-    private router: Router,
-    private adunitservice: AdunitService,
-  private http: HttpClient
-  ) {
-
-  }
-
 
   fileProgress(fileInput: any) {
     this.fileUploadProgress='0%';
@@ -44,8 +34,15 @@ export class FileUploadComponent implements OnInit {
   }
 
   onSubmit() {
-
-   const formData = new FormData();
+    /* const formData = new FormData();
+     formData.append('dosya', this.fileData);
+     this.http.post('http://192.168.0.4:5000/fu/upload', formData)
+       .subscribe(res => {
+         console.log(res);
+         this.uploadedFilePath = './uploads';
+         alert('SUCCESS !!');
+       })*/
+    const formData = new FormData();
     formData.append('dosya', this.fileData);
 
     this.fileUploadProgress = '0%';
@@ -61,7 +58,7 @@ export class FileUploadComponent implements OnInit {
         } else if(events.type === HttpEventType.Response) {
           //this.fileUploadProgress = '';
           console.log(events.body);
-        //  alert('SUCCESS !!');
+          alert('SUCCESS !!');
         }
 
       })
@@ -71,7 +68,7 @@ export class FileUploadComponent implements OnInit {
 
     var mimeType = this.fileData.type;
     if (mimeType.match(/image\/*/) == null) {
-      return this.fileUploadProgress='except of image file is not valid';
+      return this.fileUploadProgress='type is not valid';
     } else {
       console.log('done!')
     }
@@ -85,16 +82,11 @@ export class FileUploadComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.adunitservice.isLogin(this.app);
-    //let response=this.adunitservice.apiChippers('sinek','VyRghZo5CmTU4uIocL4G');
-    //console.log(response);
-    this.adunitservice
-      .indexAdUnits()
-      .subscribe((data: AdUnit[]) => {
-        console.log('index function çalışacak servise gidiyor');
-        this.adunits = data;
-      });
-    this.data.currentMessage.subscribe(message => this.message = message)
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      console.log('FileUpload:uploaded successfully:', item, status, response);
+      alert('Your file has been uploaded successfully');
+    };
   }
 
 }

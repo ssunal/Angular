@@ -50,6 +50,7 @@ const routes: Routes = [
   {path: 'postsr',component: ListpostsComponent},
   {path: 'edit/:id_user',component: EditComponent},
   {path: 'welcome',component: WelcomeComponent},
+  {path: 'upload',component: FileUploadComponent},
   {path: 'logout',component: LogOutComponent},
   {path: 'index',component: IndexComponent},
   {path: 'create',component: CreateComponent},
