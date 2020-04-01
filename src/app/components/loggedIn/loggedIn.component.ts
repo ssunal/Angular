@@ -6,7 +6,7 @@
   import { Router } from '@angular/router';
 
   import {MatDialog} from "@angular/material/dialog";
-  import {ModalComponent} from "../../modal/modal.component";
+  import {ModalComponent} from "../windows/modal/modal.component";
   import {AdunitService} from "../../adunit.service";
   @Component({
     selector: 'app-logged-In',

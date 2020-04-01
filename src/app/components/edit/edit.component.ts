@@ -39,7 +39,7 @@ export class EditComponent implements OnInit {
          console.log('Create form içine yazılan '+this.adunit.id_user);
       }
 
-    nngOnInit() {
+    /*nngOnInit() {
   console.log('ngOnInit this.adunit.id_user değeri :'+this.adunit.id_user);
       this.route.params.subscribe(params => {
         this.adunitservice.editAdUnit(params['id_user']).subscribe(res => {
@@ -48,12 +48,15 @@ export class EditComponent implements OnInit {
       });
     });
     this.data.currentMessage.subscribe(message => this.message = message)
-  }
+  }*/
 
   updateAdUnit(username,email,id_user) {
    this.route.params.subscribe(params => {
       this.adunitservice.updateAdUnit(username,email,params['id_user']);
-      this.router.navigate(['messages']);
+      //this.router.navigate(['index']);
+     this.router.navigateByUrl('/edit', { skipLocationChange: true }).then(() => {
+       this.router.navigate(['/messages']);
+     });
    });
    this.newMessage();
 }

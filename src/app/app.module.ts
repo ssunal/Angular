@@ -29,13 +29,14 @@ import {PageNotFoundComponent} from "./pageNotFound.component";
 import {MatAutocompleteModule,MatFormFieldModule,MatInputModule,MatExpansionModule,MatIconModule,MatDatepickerModule,
   MatNativeDateModule  } from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
-import {ModalComponent} from "./modal/modal.component";
+import {ModalComponent} from "./components/windows/modal/modal.component";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatSelectModule} from "@angular/material/select";
 import {FileUploadModule} from "ng2-file-upload";
 import {FileUploadComponent} from "./components/fileUpload/fileupload.component";
 import {EmailValidator} from "../../common/emailvalidator";
+import {EditRecordComponent} from "./components/windows/editrecord/editrecord.component";
 
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
@@ -85,12 +86,13 @@ const routes: Routes = [
     ListpostsComponent,
     FooterComponent,
     ModalComponent,
+    EditRecordComponent,
     GccComponent,
     FileUploadComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
     SlimLoadingBarModule,
     HttpClientModule,
     FormsModule,
@@ -101,9 +103,10 @@ const routes: Routes = [
     AppRoutingModule, MatRadioModule, MatSidenavModule, MatSelectModule,
     FileUploadModule
   ],
+  exports: [RouterModule],
   providers: [ AdunitService,DataService,Uspass, CookieService,
     EmailValidator ], // Data service sadece mesajlaşma için var
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent]
+  entryComponents: [ModalComponent,EditRecordComponent]
 })
 export class AppModule { }

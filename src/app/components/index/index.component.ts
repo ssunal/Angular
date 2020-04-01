@@ -3,6 +3,8 @@ import { AdUnit } from './AdUnit';
 import { AdunitService } from '../../adunit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from "../../app.component";
+import {EditRecordComponent} from "../windows/editrecord/editrecord.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-index',
@@ -15,7 +17,12 @@ export class IndexComponent implements OnInit {
   message:string;
 
   id:number;
+  private username: string;
+  private email: string;
+  private id_user: number;
+
   constructor(
+    public dialog: MatDialog,
       private app: AppComponent,
       private route: ActivatedRoute,
       private data: AdunitService,
@@ -35,9 +42,11 @@ export class IndexComponent implements OnInit {
       return styles;
     }
   ngOnInit() {
+
     this.adunitservice.isLogin(this.app);
    //let response=this.adunitservice.apiChippers('sinek','VyRghZo5CmTU4uIocL4G');
     //console.log(response);
+
     this.adunitservice
       .indexAdUnits()
       .subscribe((data: AdUnit[]) => {
@@ -52,9 +61,11 @@ export class IndexComponent implements OnInit {
     this.route.params.subscribe(params => {
        this.adunitservice.deleteAdUnit(id_user);
 console.log(id_user+' Deleted');
+
     });
       this.deleteMessage(id_user);
-this.router.navigate(['messages']);
+//this.router.navigate(['messages']);
+    this.ngOnInit();
     //
     //   this.adunitservice.deleteAdUnit(id_user);
     //
@@ -69,4 +80,19 @@ this.router.navigate(['messages']);
   messageRemove() {
     this.data.changeMessage("")
   }
+  openDialog(username,email,id_user): void {
+    const dialogRef = this.dialog.open(EditRecordComponent, {
+      width: '350px',
+      height: '550px',
+      data: {username: username, email: email,id_user: id_user}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    /*  this.email = result.email;
+      this.username = result.username;
+      this.id_user = result.id_user;*/
+    });
+  }
+
 }

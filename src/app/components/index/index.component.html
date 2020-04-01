@@ -15,6 +15,7 @@
             <td>{{ adunit.id_user }}</td>
           <td><a [routerLink]="['/edit', adunit.id_user]"  class="btn btn-primary">Edit</a></td>
           <td><a (click)="deleteAdUnit(adunit.id_user)" class="btn btn-danger">Delete</a></td>
+          <td><a  (click)="openDialog(adunit.username,adunit.email,adunit.id_user)"  class="btn btn-primary">Edit popup</a></td>
       </tr>
 
 </tbody>
