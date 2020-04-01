@@ -37,6 +37,7 @@ import {FileUploadModule} from "ng2-file-upload";
 import {FileUploadComponent} from "./components/fileUpload/fileupload.component";
 import {EmailValidator} from "../../common/emailvalidator";
 import {EditRecordComponent} from "./components/windows/editrecord/editrecord.component";
+import {SearchrecordComponent} from "./components/windows/searchrecords/searchrecord.component";
 
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
@@ -51,6 +52,7 @@ const routes: Routes = [
   {path: 'gcc',component: GccComponent},
   {path: 'postsr',component: ListpostsComponent},
   {path: 'edit/:id_user',component: EditComponent},
+  {path: 'search/:user',component: IndexComponent},
   {path: 'welcome',component: WelcomeComponent},
   {path: 'upload',component: FileUploadComponent},
   {path: 'logout',component: LogOutComponent},
@@ -88,7 +90,8 @@ const routes: Routes = [
     ModalComponent,
     EditRecordComponent,
     GccComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    SearchrecordComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +110,6 @@ const routes: Routes = [
   providers: [ AdunitService,DataService,Uspass, CookieService,
     EmailValidator ], // Data service sadece mesajlaşma için var
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent,EditRecordComponent]
+  entryComponents: [ModalComponent,EditRecordComponent,SearchrecordComponent]
 })
 export class AppModule { }

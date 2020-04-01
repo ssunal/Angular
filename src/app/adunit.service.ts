@@ -180,11 +180,17 @@ export class AdunitService {
                                                  }
   //--------------------------------------------------
  editAdUnit(id_user) {
-   console.log('edit servisin içinde bulunan id:'+id_user)
-   return this
-             .http
-             .get(`${this.uri}/edit/${id_user}`);
-   }
+    console.log('edit servisin içinde bulunan id:'+id_user)
+    return this
+      .http
+      .get(`${this.uri}/edit/${id_user}`);
+  }
+  searchAdUnit(user: string) {
+    console.log('search servisin içinde bulunan id:'+user)
+    return this
+      .http
+      .get(`${this.uri}/search/${user}`);
+  }
    indexAdUnits() {
      return this
                .http

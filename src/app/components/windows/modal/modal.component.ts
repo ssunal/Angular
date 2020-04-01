@@ -15,7 +15,7 @@ export class ModalComponent implements OnInit {
 email:string;
   side: string;
   hasbackdrop: string;
-  hasBackdrop: string;
+
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}

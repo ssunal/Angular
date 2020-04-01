@@ -163,6 +163,25 @@ adUnitRoutes.route('http://localhost:8090/json/posts/all/:writer/:api').get(func
     res1.status(200);
 console.log('içine girdiiiiiiiiii res1 ' + writer+api+ res1[0]);
 });
+// Defined search route
+adUnitRoutes.route('/search/:user').get(function (req, res) {
+  let whereClouse='*all';
+  let user = req.params.user;
+  console.log('search fonksiyonu çalıtııııııı'+ user );
+  if(user=='*all'){
+    whereClouse='';
+  } else {
+    whereClouse="where username like '"+user+"%'";
+  }
+  con.query("SELECT username,email,id_user FROM users "+ whereClouse + " ;", function (err, resultDEL) {
+    if(err){
+      console.log(err);
+    }
+    console.log(resultDEL);
+    res.status(200).json(resultDEL)});
+  console.log('getirrrrrrrriyor');
+
+});
 // Defined edit route
 adUnitRoutes.route('/edit/:id_user').get(function (req, res) {
 let id_user = req.params.id_user;

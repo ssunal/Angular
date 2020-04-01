@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from "../../app.component";
 import {EditRecordComponent} from "../windows/editrecord/editrecord.component";
 import {MatDialog} from "@angular/material/dialog";
+import {SearchrecordComponent} from "../windows/searchrecords/searchrecord.component";
 
 @Component({
   selector: 'app-index',
@@ -15,7 +16,7 @@ export class IndexComponent implements OnInit {
 
   adunits: AdUnit[];
   message:string;
-
+  user:string='*all';
   id:number;
   private username: string;
   private email: string;
@@ -48,7 +49,7 @@ export class IndexComponent implements OnInit {
     //console.log(response);
 
     this.adunitservice
-      .indexAdUnits()
+      .searchAdUnit(this.user)
       .subscribe((data: AdUnit[]) => {
         console.log('index function çalışacak servise gidiyor');
       this.adunits = data;
@@ -88,11 +89,30 @@ console.log(id_user+' Deleted');
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('result:'+'result.data.username')
+
       this.ngOnInit();
     /*  this.email = result.email;
       this.username = result.username;
       this.id_user = result.id_user;*/
+
     });
   }
+  openSDialog(user): void {
 
+    const dialogRefs = this.dialog.open(SearchrecordComponent, {
+      width: '350px',
+      height: '550px',
+      data: {user: user}
+    });
+
+    dialogRefs.afterClosed().subscribe(result => {
+      console.log('after s close:'+ result.user);
+      this.user=result.user;
+      this.ngOnInit();
+      /*  this.email = result.email;
+        this.username = result.username;
+        this.id_user = result.id_user;*/
+    });
+  }
 }
