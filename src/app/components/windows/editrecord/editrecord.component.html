@@ -1,7 +1,8 @@
 
 <h1 mat-dialog-title>Update record</h1>
 
-<button  mat-button (click)="onNoClick()" >close</button>
+<button  (click)="onNoClick()" ><i class="fa fa-close"></i></button>
+
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit(data)">
 
   <div class="form-group">

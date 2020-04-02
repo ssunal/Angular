@@ -1,5 +1,12 @@
-<a  (click)="openSDialog(user)"  class="btn btn-primary">Search record</a>
-<p>Filter: user starts by {{this.user}}</p>
+
+<p>Filtered: user starts by {{this.user}}</p>
+
+<form class="form-inline md-form mr-auto mb-4">
+
+<input type="text" class="col-5" formControlName="search" class="form-control" #search   />
+
+<button class="btn btn-primary"   (click)="searchAccount(search.value)"><i class="fa fa-search"></i></button>
+</form>
 <table class="table table-hover" [ngStyle]="addStyles()" >
   <thead>
   <tr>

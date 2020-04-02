@@ -11,7 +11,8 @@ interface DialogData {
 @Component({
   selector: 'app-editrecord',
   templateUrl: './editrecord.component.html',
-  styleUrls: ['./editrecord.component.css']
+  styleUrls: ['./editrecord.component.css','../../../../assets/css/font-awesome.css']
+
 })
 export class EditRecordComponent implements OnInit {
   email:string;
