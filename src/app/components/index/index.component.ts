@@ -18,11 +18,15 @@ export class IndexComponent implements OnInit {
   message: string;
   user: string = '*all';
   id: number;
-  private username: string;
+  /*private username: string;
   private email: string;
-  private id_user: number;
+  private id_user: number;*/
   search: string;
-
+  length: number;
+  array:AdUnit[];
+  count1:number=0;
+  count2:number=2;
+  //array:any = [];
   constructor(
     public dialog: MatDialog,
     private app: AppComponent,
@@ -55,9 +59,18 @@ export class IndexComponent implements OnInit {
     console.log(search)
     this.ngOnInit();
   }
-
+next(){
+  this.count2=this.count2+2;
+this.count1=this.count1+2;
+this.ngOnInit();
+}
+  previous(){
+    if (this.count1!=0) {
+    this.count2=this.count2-2;
+    this.count1=this.count1-2;
+    this.ngOnInit();
+  }}
   ngOnInit() {
-
     this.adunitservice.isLogin(this.app);
     //let response=this.adunitservice.apiChippers('sinek','VyRghZo5CmTU4uIocL4G');
     //console.log(response);
@@ -67,12 +80,34 @@ export class IndexComponent implements OnInit {
       .subscribe((data: AdUnit[]) => {
         console.log('index function çalışacak servise gidiyor');
         this.adunits = data;
+        this.length=data.length;
+        let i=0;
+        let k=this.count1;
+        let j=this.count1+2;
+        let arr:any=[];
+          data.forEach(function AdUnit (value) {
+            //this.array.push(value);
+
+            if(k<=i && i<j) {
+              console.log(i)
+              arr.push(value)
+            console.log(arr);
+
+            }
+            i=i+1;
+          });
+        this.adunits =arr;
+
       });
+    let i=0;
+
+
+
     this.data.currentMessage.subscribe(message => this.message = message)
   }
 
   deleteAdUnit(id_user) {
-    let id = id_user;
+  //  let id = id_user;
     console.log('delete function çalışacak servise gidiyor' + id_user);
     this.route.params.subscribe(params => {
       this.adunitservice.deleteAdUnit(id_user);

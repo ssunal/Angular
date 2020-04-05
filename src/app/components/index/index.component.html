@@ -7,6 +7,10 @@
 
 <button class="btn btn-primary"   (click)="searchAccount(search.value)"><i class="fa fa-search"></i></button>
 </form>
+<p>length= {{this.length}}</p>
+<p>length= {{this.count1}}</p><p>length= {{this.count2}}</p>
+<a *ngIf="this.count1>0" (click)="this.previous()" class="btn btn-info">previous</a>{{' '}}
+<a *ngIf="this.count2<this.length" (click)="this.next()" class="btn btn-danger">next</a>
 <table class="table table-hover" [ngStyle]="addStyles()" >
   <thead>
   <tr>
