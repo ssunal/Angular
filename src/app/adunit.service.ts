@@ -1,6 +1,6 @@
 import {Observable, BehaviorSubject} from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Uspass} from '../../models/uspass';
@@ -32,6 +32,7 @@ export class AdunitService {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private uspass: Uspass,
+  //  private json: JSON;
 
     private http: HttpClient,
               private cookieService: CookieService) { }
@@ -147,6 +148,19 @@ export class AdunitService {
             this.router.navigate(['login']);
         }
     }
+    loginGcc(params): Observable<JSON> {
+
+
+      const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
+
+      return this.http
+        .post<any>('http://185.122.57.199/service/service.dispatcher.php',params,{headers}
+          ).pipe(
+        tap((res:  JSON ) => {
+          //console.log(JSON.stringify(res));
+        }))
+  };
+
              loginAdUnit(username, password)   {
                                     const obj = {
                                        username: username,

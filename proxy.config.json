@@ -16,7 +16,7 @@
     "pathRewrite": {
       "^/api": ""
     }
-},
+  },
   "/axi/*": {
     "target": "http://185.122.57.199:8090",
     "secure": false,
@@ -25,5 +25,13 @@
     "pathRewrite": {
       "^/axi": ""
     }
+  },
+  "/service/*": {
+    "target": "http://185.122.57.199",
+    "secure": true,
+    "pathRewrite": {
+      "^/service": ""
+    },
+    "changeOrigin": true
   }
 }
