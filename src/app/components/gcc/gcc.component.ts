@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Posts} from "../../../../models/posts";
 import {AppComponent} from "../../app.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AdunitService} from "../../adunit.service";
 import {HttpParams} from "@angular/common/http";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-gcc',
@@ -21,6 +21,7 @@ import {HttpParams} from "@angular/common/http";
 export class GccComponent implements OnInit {
 json:JSON;
   constructor(
+    private cookieService: CookieService,
     private app: AppComponent,
     private route: ActivatedRoute,
     private data: AdunitService,
@@ -32,14 +33,16 @@ json:JSON;
 
 
   ngOnInit() {
-
+    let usr = this.cookieService.get('usr');
+    let api_key = this.cookieService.get(usr);
+    let user = this.cookieService.get('username');
     const params = new HttpParams()
       .set('service_key', 'profile')
-      .set('API_KEY', "23269130c087bf2322ede5484e4106bc")
-      .set('username','ss')
-      .set('session_user','ss');
+      .set('API_KEY', api_key)
+      .set('username',user)
+      .set('session_user',user);
 
-    this.adunitservice.loginGcc(params)
+    this.adunitservice.profileGcc(params)
       .subscribe((res: JSON) => {
         console.log( res);
         this.json=res;

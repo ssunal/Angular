@@ -38,6 +38,7 @@ import {FileUploadComponent} from "./components/fileUpload/fileupload.component"
 import {EmailValidator} from "../../common/emailvalidator";
 import {EditRecordComponent} from "./components/windows/editrecord/editrecord.component";
 import {SearchrecordComponent} from "./components/windows/searchrecords/searchrecord.component";
+import {LoginGccComponent} from "./components/loginGcc/logingcc.component";
 
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
@@ -46,7 +47,7 @@ const routes: Routes = [
     component: FooterComponent,
     outlet: "footer"
   },
-
+  {path: 'logingcc',component: LoginGccComponent},
   {path: 'login',component: LoginComponent},
   {path: 'uspassr',component: ListuspassComponent},
   {path: 'gcc',component: GccComponent},
@@ -76,6 +77,7 @@ const routes: Routes = [
 
     CreateComponent,
     LoginComponent,
+    LoginGccComponent,
     IndexComponent,
     EditComponent,
     MessagesComponent,

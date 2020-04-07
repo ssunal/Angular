@@ -45,18 +45,18 @@ export class AdunitService {
                          .subscribe(res => { this.changeLoginMessage('getcookie');
                            console.log('http getcookie hatasız yapıldı')});
               }
-              setCookie(username) {
-                console.log('set cookie girdi');
-                const obj = {
-                  username: username,
+  setCookie(username) {
+    console.log('set cookie girdi');
+    const obj = {
+      username: username,
 
-                };
-                   this
-                         .http
-                         .post(`${this.uri}/setcookie`,obj)
-                         .subscribe(res => { this.changeLoginMessage(username+': postcookie');
-                           console.log('http poscookie hatasız yapıldı')});
-              }
+    };
+    this
+      .http
+      .post(`${this.uri}/setcookie`,obj)
+      .subscribe(res => { this.changeLoginMessage(username+': postcookie');
+        console.log('http poscookie hatasız yapıldı')});
+  }
               addAdUnit(username, email, id_user) {
                    const obj = {
                      username: username,
@@ -148,7 +148,7 @@ export class AdunitService {
             this.router.navigate(['login']);
         }
     }
-    loginGcc(params): Observable<JSON> {
+    profileGcc(params): Observable<JSON> {
 
 
       const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
@@ -160,7 +160,18 @@ export class AdunitService {
           //console.log(JSON.stringify(res));
         }))
   };
+  loginGcc(params): Observable<any> {
 
+
+    const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
+
+    return this.http
+      .post<any>('http://185.122.57.199/service/service.x.php',params,{headers}
+      ).pipe(
+        tap((res:  any ) => {
+          //console.log(JSON.stringify(res));
+        }))
+  };
              loginAdUnit(username, password)   {
                                     const obj = {
                                        username: username,
