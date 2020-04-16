@@ -4,7 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AdunitService} from "../../adunit.service";
 import {HttpParams} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
-
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import {strictEqual} from "assert";
 @Component({
   selector: 'app-gcc',
   templateUrl: './gcc.component.html',
@@ -19,8 +20,21 @@ import {CookieService} from "ngx-cookie-service";
   ]
 })
 export class GccComponent implements OnInit {
-json:JSON;
+  json:{mobile:string,phone_number:string};
+  user:{
+    email: any;
+    phone_number: any;
+    mobile: any;
+    c_profile:{profile: any;};};
+  username:string;
+  usertitle:string;
+  uri:string;
+  skills:[];
+  private trustedDashboardUrl : SafeUrl;
+  private titles: [{jobtitle: string}];
+  private title: string;
   constructor(
+    private sanitizer: DomSanitizer,
     private cookieService: CookieService,
     private app: AppComponent,
     private route: ActivatedRoute,
@@ -43,11 +57,30 @@ json:JSON;
       .set('session_user',user);
 
     this.adunitservice.profileGcc(params)
-      .subscribe((res: JSON) => {
-        console.log( res);
-        this.json=res;
+      .subscribe((res: any) => {
+
+        //this.json=res;
+        this.json=res.user;
+        this.user=res.user;
+        this.username=res.user.name;
+        this.usertitle=res.user.title;
+        this.skills=res.user.skills.skill;
+        this.titles=res.user.titles.title;
+        this.title='';
+        for (let key in this.titles) {
+            console.log ('key: ' +  key + ',  value: ' + this.titles[key].jobtitle);
+            this.title=this.title+','+this.titles[key].jobtitle;
+          }
+        //console.log( this.titles);
+        this.trustedDashboardUrl =
+          this.sanitizer.bypassSecurityTrustResourceUrl
+          (this.user.c_profile.profile[0].url1);
+           this.uri=standardEncoding(this.user.c_profile.profile[0].url1);
       });
 
   }
 
+}
+function standardEncoding(v: string): string {
+  return decodeURIComponent(v).replace(/&#47;/gi, '/');
 }

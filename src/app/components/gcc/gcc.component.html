@@ -33,8 +33,8 @@
           <!-- name and tagline -->
           <div class="title col s12 m12 l9 right  wow fadeIn" data-wow-delay="0.1s">
 
-            <h2 style="text-shadow: cornflowerblue ">{{this.json.user.name}}</h2>
-            <h5 style="text-shadow: cornflowerblue">{{this.json.user.title}}</h5>
+            <h2 style="text-shadow: cornflowerblue ">{{this.username}}</h2>
+            <h5 style="text-shadow: cornflowerblue">{{this.usertitle}}</h5>
           </div></div>
         </div>
         <!-- sidebar info -->
@@ -65,11 +65,11 @@
             <div class="col m12 s12 l9 info wow fadeIn a2" data-wow-delay="0.2s" >
               <div class="section-item-details">
                 <div class="personal">
-                  <h4><a href="tel:555-555-5555">{{this.json.user.mobile}}</a></h4>
+                  <h4><a href="tel:555-555-5555">{{this.user?.mobile}}</a></h4>
                   <span>mobile</span>
                 </div>
                 <div class="work">
-                  <h4><a href="tel:555-555-5555">{{this.json.user.phone_number}}</a></h4>
+                  <h4><a href="tel:555-555-5555">{{this.user?.phone_number}}</a></h4>
                   <span>work</span>
                 </div>
               </div>
@@ -88,7 +88,7 @@
             <div class="col m12 s12 l9 info wow fadeIn a3" data-wow-delay="0.3s" >
               <div class="section-item-details">
                 <div class="personal">
-                  <h4><a href="mailto:someone@example.com">{{this.json.user.email}}</a></h4>
+                  <h4><a href="mailto:someone@example.com">{{this.user?.email}}</a></h4>
                   <span>personal</span>
                 </div>
 
@@ -112,10 +112,10 @@
             <div class="col m12 s12 l9 info wow fadeIn a4" data-wow-delay="0.4s">
               <div class="section-item-details">
                 <div class="address-details">
-                  <h4>{{this.json.user.adress1}} <br>
-                    {{this.json.user.adress2}}<br>
-                    {{this.json.user.adress3}},<span>{{this.json.user.postcode}}</span><br>
-                    {{this.json.user.county}}</h4>
+                  <h4>{{this.user?.adress1}} <br>
+                    {{this.user?.adress2}}<br>
+                    {{this.user?.adress3}},<span>{{this.user?.postcode}}</span><br>
+                    {{this.user?.county}}</h4>
                 </div>
               </div>
             </div>
@@ -132,9 +132,22 @@
             <!-- Skills -->
             <div class="col m12 l9 s12 skill-line  wow fadeIn" data-wow-delay="0.5s" style="visibility: visible; -webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
               <h3>Professional Skills </h3>
+              <div *ngFor="let skills of this.skills">
+                <span>{{skills.skill}}</span>
+                <div *ngIf="skills.slevel=='Practitioner'">
+                  <div class="progress">
+                  <div  class="determinate">100%</div>
+                  </div>
+                </div>
+                <div *ngIf="skills.slevel=='Awareness'">
+                  <div class="progress">
+                  <div class="determinate" >50%</div>
+                  </div>
+                </div>
+              </div>
               <span>Adobe Photoshop</span>
               <div class="progress">
-                <div class="determinate"> 70% </div>
+                <div class="determinate">60%</div>
               </div>
 
               <span>HTML</span>
@@ -170,6 +183,23 @@
 
     <section class="col s12 m12 l8 section">
       <div class="row">
+        <div class="section-wrapper z-depth-1">
+          <div class="section-icon col s12 m12 l2">
+            <i class="fa fa-suitcase"></i>
+          </div>
+
+          <div class="experiences col s12 m12 l10 wow fadeIn a1" data-wow-delay="0.1s">
+            <h2>Preferred job titles</h2>
+
+
+            <div class="experiences-details wow fadeIn a4" data-wow-delay="0.4s">
+
+
+                {{this.title}}
+
+            </div>
+          </div>
+        </div>
         <div class="section-wrapper z-depth-1">
           <div class="section-icon col s12 m12 l2">
             <i class="fa fa-suitcase"></i>
@@ -262,7 +292,7 @@
             <i class="fa fa-globe"></i>
           </div>
           <div class="col s12 m12 l10 website right" >
-            <a href="" class="left "><h5>www.alrayhan.com</h5></a>
+            <a href='{{this.uri}}' class="left "><h5><span [innerHTML]="this.user?.c_profile.profile[0].url1"></span></h5></a>
             <a href="http://www.52linesofcode.uk" class="left"><h5>www.52linesofcode.uk</h5></a>
           </div>
         </div>
