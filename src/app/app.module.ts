@@ -40,6 +40,7 @@ import {EditRecordComponent} from "./components/windows/editrecord/editrecord.co
 import {SearchrecordComponent} from "./components/windows/searchrecords/searchrecord.component";
 import {LoginGccComponent} from "./components/loginGcc/logingcc.component";
 import {UploadwindowComponent} from "./components/windows/uploadwindow/uploadwindow.component";
+import {IpProvider} from "../../common/ip";
 
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
@@ -111,7 +112,7 @@ const routes: Routes = [
     FileUploadModule
   ],
   exports: [RouterModule],
-  providers: [ AdunitService,DataService,Uspass, CookieService,
+  providers: [ AdunitService,DataService,Uspass, CookieService,IpProvider,
     EmailValidator ], // Data service sadece mesajlaşma için var
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent,EditRecordComponent,SearchrecordComponent,UploadwindowComponent]

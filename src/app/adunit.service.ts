@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Uspass} from '../../models/uspass';
+import {IpProvider} from '../../common/ip';
 import { tap } from  'rxjs/operators';
 
 
@@ -15,7 +16,7 @@ export class AdunitService {
   cookieValue = 'UNKNOWN';
   //login:string;
 
-  uri = 'http://192.168.0.4:5000/adunits';
+  uri = this.ipProvider.ipInt_1+':5000/adunits';
 
   private messageSource= new BehaviorSubject<string>('');
   private messageLoginSource= new BehaviorSubject<string>('');
@@ -32,6 +33,7 @@ export class AdunitService {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private uspass: Uspass,
+              private ipProvider: IpProvider,
   //  private json: JSON;
 
     private http: HttpClient,
@@ -149,12 +151,12 @@ export class AdunitService {
         }
     }
     profileGcc(params): Observable<JSON> {
-
+      let url=this.ipProvider.IpExt_1+'/service/service.dispatcher.php';
 
       const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
 
       return this.http
-        .post<any>('http://185.122.57.199/service/service.dispatcher.php',params,{headers}
+        .post<any>(url,params,{headers}
           ).pipe(
         tap((res:  JSON ) => {
           //console.log(JSON.stringify(res));
@@ -162,12 +164,12 @@ export class AdunitService {
   };
 
   loginGcc(params): Observable<any> {
-
+    let url=this.ipProvider.IpExt_1+'/service/service.x.php';
     console.log('fdfgdfgdffgd');
     const headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
 
     return this.http
-      .post<any>('http://185.122.57.199/service/service.x.php',params,{headers}
+      .post<any>(url,params,{headers}
       ).pipe(
         tap((res:  any ) => {
           //console.log(JSON.stringify(res));
