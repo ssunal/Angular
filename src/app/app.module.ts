@@ -39,6 +39,7 @@ import {EmailValidator} from "../../common/emailvalidator";
 import {EditRecordComponent} from "./components/windows/editrecord/editrecord.component";
 import {SearchrecordComponent} from "./components/windows/searchrecords/searchrecord.component";
 import {LoginGccComponent} from "./components/loginGcc/logingcc.component";
+import {UploadwindowComponent} from "./components/windows/uploadwindow/uploadwindow.component";
 
 const routes: Routes = [
   {path: "products", component: ListuspassComponent, outlet: "bottomFrame"},//
@@ -93,7 +94,8 @@ const routes: Routes = [
     EditRecordComponent,
     GccComponent,
     FileUploadComponent,
-    SearchrecordComponent
+    SearchrecordComponent,
+    UploadwindowComponent
   ],
   imports: [
     BrowserModule,
@@ -112,6 +114,6 @@ const routes: Routes = [
   providers: [ AdunitService,DataService,Uspass, CookieService,
     EmailValidator ], // Data service sadece mesajlaşma için var
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent,EditRecordComponent,SearchrecordComponent]
+  entryComponents: [ModalComponent,EditRecordComponent,SearchrecordComponent,UploadwindowComponent]
 })
 export class AppModule { }

@@ -11,7 +11,8 @@
 
           <!-- image -->
           <div class="col 14" style="margin-top: 20px;">
-            <a href="index.html"><img src="assets/images/cc.jpg" class="responsive-img" alt=""></a>
+            <a (click)="this.openDialog()" ><img src="assets/images/cc.jpg" class="responsive-img" alt=""></a>
+
           </div>
 
           <!--  navigation
@@ -293,7 +294,7 @@
           </div>
           <div class="col s12 m12 l10 website right" >
             <a href='{{this.uri}}' class="left "><h5><span [innerHTML]="this.user?.c_profile.profile[0].url1"></span></h5></a>
-            <a href="http://www.52linesofcode.uk" class="left"><h5>www.52linesofcode.uk</h5></a>
+            <a href='{{this.uri2}}' class="left "><h5><span [innerHTML]="this.user?.c_profile.profile[0].url2"></span></h5></a>
           </div>
         </div>
       </div>

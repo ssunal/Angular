@@ -5,7 +5,10 @@ import {AdunitService} from "../../adunit.service";
 import {HttpParams} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
-import {strictEqual} from "assert";
+//import {strictEqual} from "assert";
+//import {EditRecordComponent} from "../windows/editrecord/editrecord.component";
+import {MatDialog} from "@angular/material/dialog";
+import {UploadwindowComponent} from "../windows/uploadwindow/uploadwindow.component";
 @Component({
   selector: 'app-gcc',
   templateUrl: './gcc.component.html',
@@ -33,7 +36,9 @@ export class GccComponent implements OnInit {
   private trustedDashboardUrl : SafeUrl;
   private titles: [{jobtitle: string}];
   private title: string;
+  uri2: string;
   constructor(
+    public dialog: MatDialog,
     private sanitizer: DomSanitizer,
     private cookieService: CookieService,
     private app: AppComponent,
@@ -76,10 +81,27 @@ export class GccComponent implements OnInit {
           this.sanitizer.bypassSecurityTrustResourceUrl
           (this.user.c_profile.profile[0].url1);
            this.uri=standardEncoding(this.user.c_profile.profile[0].url1);
+        this.uri2=standardEncoding(this.user.c_profile.profile[0].url2);
       });
 
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UploadwindowComponent, {
+      width: '350px',
+      height: '550px',
+      data: {}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('result:' + 'result.data.username')
+
+      this.ngOnInit();
+      /*  this.email = result.email;
+        this.username = result.username;
+        this.id_user = result.id_user;*/
+
+    });
+  }
 }
 function standardEncoding(v: string): string {
   return decodeURIComponent(v).replace(/&#47;/gi, '/');

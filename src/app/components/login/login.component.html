@@ -3,7 +3,7 @@
   <div class="card-body">
     <form [formGroup]="angForm" novalidate>
       <div class="form-group">
-        <label class="col-md-4">User Name</label>
+        <label class="col-md-4">cd /root/jsproject/src altındaki Chippers User Name</label>
         <input type="text" class="form-control" name="username" required formControlName="username" #username value="{{messageUsername}}"/>
       </div>
       <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="alert alert-danger">
